@@ -57,6 +57,19 @@ int main(int argc, char* argv[]) {
 		cerr << "No file name was given\n";
 		return 1;
 	}
+//------Cool-options-with-"--"-----------------------
+	string optionDashDash = argv[1];
+	//getting help
+	if (optionDashDash == "--help") {
+		cout << "Usage:\n"
+		     << "    open <file>\n"
+		     << "    open --removeConf (removes the config file AND directory)\n";
+		return 0;
+	}
+	//removing config
+	if (optionDashDash == "--removeConf") {
+		system("rm -rf ~/.config/open-any/");
+	}
 //------The-file--------------------------------------
 	path theFile = argv[1];
 //------Error-handling--------------------------------
@@ -67,19 +80,26 @@ int main(int argc, char* argv[]) {
 		opening += argv[1];
 		system(opening.c_str());
 	}
-
+//------generic-text-files---------------------------
 	else if (theFile.extension() == ".txt") {
 		string opening = text + " ";
 		opening += argv[1];
 		system(opening.c_str());	
 	}
+//------audio-only-files-----------------------------
 	else if (theFile.extension() == ".mp3" || theFile.extension() == ".m4a" || theFile.extension() == ".aac" || theFile.extension() == ".wav" || theFile.extension() == ".flac" || theFile.extension() == ".ogg" || theFile.extension() == ".opus" || theFile.extension() == ".aiff" || theFile.extension() == ".aif" || theFile.extension() == ".wma" || theFile.extension() == ".alac" || theFile.extension() == ".ape" || theFile.extension() == ".wv" || theFile.extension() == ".tta" || theFile.extension() == ".amr" || theFile.extension() == ".mid" || theFile.extension() == ".midi" || theFile.extension() == ".dsf" || theFile.extension() == ".dff" || theFile.extension() == ".au" || theFile.extension() == ".ra" || theFile.extension() == ".voc"
 ) {
 		string opening = audio + " ";
 		opening += argv[1];
 		system(opening.c_str());
 	}
-	// When no matching extensions
+//------video-files----------------------------------
+	else if (theFile.extension() == ".mp4") {
+		string opening = video + " ";
+		opening += argv[1];
+		system(opening.c_str());
+	}
+//------When-no-matching-extensions------------------
 	else {
 		string opening = defaultOp + " ";
 		opening += argv[1];

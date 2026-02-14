@@ -17,6 +17,10 @@ string code;
 string text;
 string audio;
 string video;
+string mdown;
+string pics;
+string gimp;
+string krita;
 string defaultOp;
 
 // error printing
@@ -31,11 +35,15 @@ int main(int argc, char* argv[]) {
 	if (!fs::exists(confPath)) {
 		system("mkdir ~/.config/open-any/");
 		ofstream configMaker(confPath);
-		configMaker << "vim"  << '\n'
-			    << "nano" << '\n'
-			    << "mpv"  << '\n'
-			    << "mpv"  << '\n'
-			    << "vim"  << '\n';
+		configMaker << "vim"   << '\n'
+			    << "nano"  << '\n'
+			    << "mpv"   << '\n'
+			    << "mpv"   << '\n'
+			    << "emacs" << '\n'
+			    << "feh"   << '\n'
+			    << "gimp"  << '\n'
+			    << "krita" << '\n'
+			    << "vim"   << '\n';
 		configMaker.close();
 	}
 //------assigning-config-values-to-program-values----
@@ -50,6 +58,10 @@ int main(int argc, char* argv[]) {
 			     >> text
 			     >> audio
 			     >> video
+			     >> mdown
+			     >> pics
+			     >> gimp
+			     >> krita
 			     >> defaultOp;
 	}
 //------when-nothing-is-passed-----------------------
@@ -75,7 +87,8 @@ int main(int argc, char* argv[]) {
 //------Error-handling--------------------------------
 	// no errors to handle (for now)
 //------code-files------------------------------------
-	if(theFile.extension() == ".C" || theFile.extension() == ".c" || theFile.extension() == ".cpp" || theFile.extension() == ".h" || theFile.extension() == ".hpp" || theFile.extension() == ".sh" || theFile.extension() == ".py" || theFile.extension() == ".java") {
+	if(theFile.extension() == ".C" || theFile.extension() == ".c" || theFile.extension() == ".cc" || theFile.extension() == ".cpp" || theFile.extension() == ".cxx" || theFile.extension() == ".h" || theFile.extension() == ".hh" || theFile.extension() == ".hpp" || theFile.extension() == ".hxx" || theFile.extension() == ".sh" || theFile.extension() == ".bash" || theFile.extension() == ".zsh" || theFile.extension() == ".py" || theFile.extension() == ".pyw" || theFile.extension() == ".java" || theFile.extension() == ".js" || theFile.extension() == ".ts" || theFile.extension() == ".rs" || theFile.extension() == ".go" || theFile.extension() == ".rb" || theFile.extension() == ".php" || theFile.extension() == ".cs" || theFile.extension() == ".swift" || theFile.extension() == ".kt" || theFile.extension() == ".kts" || theFile.extension() == ".scala" || theFile.extension() == ".dart" || theFile.extension() == ".lua" || theFile.extension() == ".pl" || theFile.extension() == ".r" || theFile.extension() == ".m" || theFile.extension() == ".mm" || theFile.extension() == ".sql" || theFile.extension() == ".asm"
+) {
 		string opening = code + " ";
 		opening += argv[1];
 		system(opening.c_str());
@@ -94,11 +107,36 @@ int main(int argc, char* argv[]) {
 		system(opening.c_str());
 	}
 //------video-files----------------------------------
-	else if (theFile.extension() == ".mp4") {
+	else if (theFile.extension() == ".mp4" || theFile.extension() == ".mov" || theFile.extension() == ".mkv" || theFile.extension() == ".avi") {
 		string opening = video + " ";
 		opening += argv[1];
 		system(opening.c_str());
 	}
+//------Mark-down------------------------------------
+	else if(theFile.extension() == ".md") {
+		string opening = mdown + " ";
+		opening += argv[1];
+		system(opening.c_str());
+	}
+//------Pictures-------------------------------------
+	else if(theFile.extension() == ".png" || theFile.extension() == ".apng" || theFile.extension() == ".jpg" || theFile.extension() == ".jpeg" || theFile.extension() == ".jpe" || theFile.extension() == ".jfif"
+) {
+		string opening = pics + " ";
+		opening += argv[1];
+		system(opening.c_str());
+	}
+//------GIMP-----------------------------------------
+	else if(theFile.extension() == ".xcf") {
+		string opening = gimp + " ";
+		opening += argv[1];
+		system(opening.c_str());
+	}
+//------Krita----------------------------------------
+	else if(theFile.extension() == ".kra") {
+                 string opening = krita + " ";
+                 opening += argv[1];
+                 system(opening.c_str());
+         }
 //------When-no-matching-extensions------------------
 	else {
 		string opening = defaultOp + " ";

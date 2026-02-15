@@ -3,11 +3,13 @@
 #include <fstream>
 #include <filesystem>
 #include <string>
+//my-headers---------------------------------
+#include "stuff.h"
 //namespaces----------------------------------
 using namespace std;
 namespace fs = std::filesystem;
 using namespace fs;
-
+/*
 //!!! ADD TO A SEPARATE HEADER FILE LATER
 // important values
 // paths
@@ -27,7 +29,7 @@ string defaultOp;
 void prnError(string s) {
 	cerr << "\033[31m" << "\033[1m" << s;
 }
-
+*/
 //!!!
 
 int main(int argc, char* argv[]) {

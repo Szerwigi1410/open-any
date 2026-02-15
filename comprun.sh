@@ -1,3 +1,3 @@
 #!/bin/bash
-c++ main.cpp
-./a.out
+c++ main.cpp -o open
+./open

@@ -12,6 +12,11 @@ Just edit the config file in `~/.config/open-any/config.txt`. The flag `--editCo
 
 ---
 
+# INSTALATION
+After clonning the repo run:
+>`c++ main.cpp -o open && sudo cp open /usr/bin`
+
+---
 # Supported File Types
 
 ## Code Files

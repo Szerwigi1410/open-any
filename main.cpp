@@ -9,43 +9,22 @@
 using namespace std;
 namespace fs = std::filesystem;
 using namespace fs;
-/*
-//!!! ADD TO A SEPARATE HEADER FILE LATER
-// important values
-// paths
-string confPath = string(getenv("HOME")) + "/.config/open-any/config.txt";
-//programs
-string code;
-string text;
-string audio;
-string video;
-string mdown;
-string pics;
-string gimp;
-string krita;
-string defaultOp;
 
-// error printing
-void prnError(string s) {
-	cerr << "\033[31m" << "\033[1m" << s;
-}
-*/
-//!!!
-
+//main-code------------------------------------------
 int main(int argc, char* argv[]) {
 //------config-file-checker/creator------------------
 	if (!fs::exists(confPath)) {
 		system("mkdir ~/.config/open-any/");
 		ofstream configMaker(confPath);
-		configMaker << "vim"   << '\n'
-			    << "nano"  << '\n'
-			    << "mpv"   << '\n'
-			    << "mpv"   << '\n'
-			    << "emacs" << '\n'
-			    << "feh"   << '\n'
-			    << "gimp"  << '\n'
-			    << "krita" << '\n'
-			    << "vim"   << '\n';
+		configMaker << "vim"   << '\n' //1
+			    << "nano"  << '\n' //2
+			    << "mpv"   << '\n' //3
+			    << "mpv"   << '\n' //4
+			    << "emacs" << '\n' //5
+			    << "feh"   << '\n' //6
+			    << "gimp"  << '\n' //7
+			    << "krita" << '\n' //8
+			    << "vim"   << '\n';//9
 		configMaker.close();
 	}
 //------assigning-config-values-to-program-values----
@@ -56,15 +35,15 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	else {
-		valueReader  >> code
-			     >> text
-			     >> audio
-			     >> video
-			     >> mdown
-			     >> pics
-			     >> gimp
-			     >> krita
-			     >> defaultOp;
+		valueReader  >> code 	   //1
+			     >> text       //2
+			     >> audio	   //3
+			     >> video	   //4
+			     >> mdown	   //5
+			     >> pics 	   //6
+			     >> gimp 	   //7
+			     >> krita	   //8
+			     >> defaultOp; //9
 	}
 //------when-nothing-is-passed-----------------------
 	if (argc < 2) {
@@ -77,12 +56,17 @@ int main(int argc, char* argv[]) {
 	if (optionDashDash == "--help") {
 		cout << "Usage:\n"
 		     << "    open <file>\n"
-		     << "    open --removeConf (removes the config file AND directory)\n";
+		     << "    open --removeConf (removes the config file AND directory)\n"
+		     << "    open --editConf (opens the config file in vim)\n";
 		return 0;
 	}
 	//removing config
 	if (optionDashDash == "--removeConf") {
 		system("rm -rf ~/.config/open-any/");
+	}
+	//getting to config
+	if (optionDashDash == "--editConf") {
+		system("vim ~/.config/open-any/config.txt");
 	}
 //------The-file--------------------------------------
 	path theFile = argv[1];

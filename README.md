@@ -103,4 +103,4 @@ Just edit the config file in `~/.config/open-any/config.txt`. The flag `--editCo
 ## Default Handler (vim by default)
 - Any other file extension not listed above
  
-> **NOTE:** **Open-any** currently does not support user-defined file extensions but im working on it. If you REALY need more extensions you can modify the source code and feel free to 
+> **NOTE:** **Open-any** currently does not support user-defined file extensions but im working on it. If you REALY need more extensions you can modify the source code and feel free to contribute!

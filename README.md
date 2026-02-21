@@ -2,7 +2,7 @@
 Open any file from linux terminal
 
 ![logo](photos/open-any_loggo.png)
-![Static Badge](https://img.shields.io/badge/made_with-vim)
+![Static Badge](https://img.shields.io/badge/made_with--vim)
 
 ---
 Tired of needing to specify the program to open a file from your terminal? Ever wished something would just do it for you? Well then the program you are looking for is **open-any**

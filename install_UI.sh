@@ -187,6 +187,8 @@ if [ $? -ne 0 ]; then
 fi
 clear
 
+#compChoice=$(dialog --clear --title "Compiling" --backtitle "$BACKTITLE" --menu "-static or not?" 15 60 6 \) will finish later
+
 # Find local candidates
 available_scripts=()
 for f in open; do

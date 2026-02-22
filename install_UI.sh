@@ -208,21 +208,12 @@ Please install 'curl' and re-run." 10 60
   fi
 
   choice=$(dialog --clear --title "Choose binary to download" --backtitle "$BACKTITLE" --menu "Select a version to download:" 15 60 6 \
-    1 "Normal" \
-    2 "Beta" \
-    3 "Modular" \
-    4 "Quit" 3>&1 1>&2 2>&3) || true
+    1 "Quit" 3>&1 1>&2 2>&3) || true
   clear
 
   case "$choice" in
     1)
-      url="$NORMAL_URL"; name="brokefetch.sh" ;;
-    2)
-      url="$EDGE_URL"; name="brokefetch_beta.sh" ;;
-    #3)
-    #  url="$BETA2_URL"; name="brokefetch_beta2.sh" ;;
-    3)
-      url="$MOD_URL"; name="brokefetch_mod.sh" ;;
+      url="$NORMAL_URL"; name="open" ;;
     *)
       echo "Canceled."; exit 0 ;;
   esac
@@ -276,11 +267,11 @@ clear
 
 case "$install_choice" in
   1)
-    install_path="/usr/bin/brokefetch"
+    install_path="/usr/bin/open"
     install_scope="system"
     ;;
   2)
-    install_path="$HOME/.local/bin/brokefetch"
+    install_path="$HOME/.local/bin/open"
     install_scope="user"
     ;;
   *)
@@ -290,7 +281,7 @@ esac
 install_dir=$(dirname "$install_path")
 
 if [ "$install_scope" = "system" ]; then
-  LOG_FILE="/var/log/brokefetch_installer.log"
+  LOG_FILE="/var/log/open-any_installer.log"
   if ! sudo test -d /var/log; then
     sudo mkdir -p /var/log
   fi
@@ -340,35 +331,6 @@ if [ "$install_scope" = "system" ]; then
 else
   run_and_log cp -f "$source_file" "$install_path"
   run_and_log chmod 0755 "$install_path"
-fi
-
-if [[ "$script_to_install" == *"mod"* || "$script_to_install" == "brokefetch_mod.sh" ]]; then
-  if [ "$install_scope" = "system" ]; then
-    target_logos_dir="/usr/share/brokefetch/logos"
-    run_and_log sudo mkdir -p "$target_logos_dir"
-    run_and_log git clone --depth 1 "$REPO_URL" "$TEMP_DIR/brokefetch_repo"
-    if [ -d "$TEMP_DIR/brokefetch_repo/logos" ]; then
-      run_and_log sudo cp -r "$TEMP_DIR/brokefetch_repo/logos" "$target_logos_dir"
-      run_and_log sudo chown -R "$(whoami):$(whoami)" "$target_logos_dir"
-      log "Copied logos to $target_logos_dir"
-    else
-      dialog --clear --title "Warning" --backtitle "$BACKTITLE" --msgbox "Warning: logos directory not found in repo." 8 60
-      clear
-      log "logos dir not found in cloned repo"
-    fi
-  else
-    target_logos_dir="$HOME/.local/share/brokefetch/logos"
-    mkdir -p "$(dirname "$target_logos_dir")"
-    run_and_log git clone --depth 1 "$REPO_URL" "$TEMP_DIR/brokefetch_repo"
-    if [ -d "$TEMP_DIR/brokefetch_repo/logos" ]; then
-      run_and_log cp -r "$TEMP_DIR/brokefetch_repo/logos" "$target_logos_dir"
-      log "Copied logos to $target_logos_dir"
-    else
-      dialog --clear --title "Warning" --backtitle "$BACKTITLE" --msgbox "Warning: logos directory not found in repo." 8 60
-      clear
-      log "logos dir not found in cloned repo"
-    fi
-  fi
 fi
 
 if [ "$install_scope" = "user" ]; then
